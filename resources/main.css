@@ -1,3 +1,39 @@
 body{
     background: blue;
 }
+
+#book-grid{
+    background: yellow;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 10px;
+    width: 400px;
+    height: 500px;
+}
+
+.book-card{
+    background: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding:2px;
+
+}
+
+.title{
+    background: crimson;
+    padding: 10px;
+}
+
+.book-info{
+    padding: 10px;
+    background: darkgray;
+}
+
+.form-container{
+    background: darkkhaki;
+    width: 200px;
+    height: 300px;
+    display: block;
+    position: absolute;
+}

@@ -8,8 +8,23 @@
     <link rel="stylesheet" href="./resources/main.css"> 
 </head>
 <body>
-    
-
+    <button id="add-book" type="form">Add Book</button>
+    <div id="book-form">
+        <form class="form-container">
+            <label>Book Tittle</label>
+            <input type="text" name="title" required>
+            <label>Author</label>
+            <input type="text" name="author" required>
+            <label>Number of Pages</label>
+            <input type="number" name="total-pages" required>
+            <button class="form-button" id="submit-button">Submit</button>
+            <button class="form-button" id="cancel-button">Cancel</button>
+        </form>>
+    </div>
+    <div id=library-container>
+        <div id="book-grid">
+        </div> 
+    </div>
     <script src="./main.js"></script>
 </body>
 </html>
