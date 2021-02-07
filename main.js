@@ -1,17 +1,35 @@
 let myLibrary = [];
 
-function Book(title, author, pages) {
+function Book(title, author, pages, status=true) {
     this.title = title
     this.author = author
     this.pages = pages
+    this.status = status
+}
+
+Book.prototype.readPagesToggle= function(){
+    this.status= !this.status
+    //console.log(checkstatus);
 }
 
 function addBookToLibrary(book){
     myLibrary.push(book);
+    displayBook(book);
 }
 
 function displayLibrary(){
     myLibrary.forEach((book) => displayBook(book));
+    events();
+}
+
+function resetLibrary(){
+    let container= document.querySelector("#library-container");
+    let libraryGrid = document.querySelector("#book-grid");
+    libraryGrid.remove();
+    let newLibraryGrid = document.createElement("div");
+    newLibraryGrid.id="book-grid";
+
+    container.appendChild(newLibraryGrid);
 }
 
 function openForm(){
@@ -27,49 +45,125 @@ function closeForm(){
 
 function createBook(){
     form= document.querySelector(".form-container");
-    let title = document.querySelector("#title").value;
-    let author = document.querySelector("#author").value;
+    let title = document.querySelector("#title-form").value;
+    let author = document.querySelector("#author-form").value;
     let totalPages = document.querySelector("#total-pages").value;
     let livro = new Book(title, author, totalPages);
     addBookToLibrary(livro);
-    displayBook(livro);
+    resetLibrary();
+    displayLibrary();
 }
 
 function displayBook(book){
     let libraryGrid=document.querySelector("#book-grid");
+    index=myLibrary.indexOf(book);
 
+    //make bookCard element
     let bookCard = document.createElement("div");
     bookCard.classList.add("book-card");
-    bookCard.innerHTML = `<div class = "title">${book.title}</div>
-                            <div class = "book-info">${book.author}</div>`;
-    libraryGrid.appendChild(bookCard);
 
+    //remove-button
+    let divHeader= document.createElement("div");
+    divHeader.classList.add("book-header");
+    let removeButton=document.createElement("button");
+    removeButton.classList.add("remove");
+    removeButton.setAttribute("data-index", `${index}`);
+    removeButton.textContent="X";
+    divHeader.appendChild(removeButton);
+    bookCard.appendChild(divHeader);
+
+    //bookCard Title
+    let divTitle= document.createElement("div");
+    divTitle.classList.add("book-title");
+    let hTitle = document.createElement("h2");
+    hTitle.textContent=`${book.title}`;
+    divTitle.appendChild(hTitle);
+    bookCard.appendChild(divTitle);
+
+    //other info
+    let divInfo= document.createElement("div");
+    divInfo.classList.add("book-info");
+        //author
+    let pAuthor = document.createElement("p");
+    pAuthor.id = "author";
+    pAuthor.textContent=`by ${book.author}`;
+    divInfo.appendChild(pAuthor);
+        //n of pages
+    let pPages = document.createElement("p")
+    pPages.id="pages";
+    pPages.textContent=`Nº of Pages: ${book.pages}`
+    divInfo.appendChild(pPages);
+
+    bookCard.appendChild(divInfo);
+
+    // read status
+    let divReadStatus= document.createElement("div");
+    divReadStatus.classList.add("read-status-container");
+    let readStatusButton= document.createElement("button");
+    let readStatusLabel= document.createElement("label");
+    readStatusButton.id="read-status";
+    readStatusButton.setAttribute("data-index", `${index}`);
+    if (book.status == true){
+        readStatusLabel.textContent="Book finished!";
+        readStatusButton.textContent="Not Read?";
+    }
+    else{
+        readStatusLabel.textContent="Still Reading...";
+        readStatusButton.textContent="Completed?";
+        bookCard.setAttribute("class", "not-read-card");
+    }
+    divReadStatus.appendChild(readStatusLabel);
+    divReadStatus.appendChild(readStatusButton);
+    bookCard.appendChild(divReadStatus);
+
+    libraryGrid.appendChild(bookCard);
+   // book.readPagesToggle();
 }
 
-livro1 = new Book("livro1", "filipa",22);
-livro2 = new Book("Livro 2", "Julianna",22);
-livro3 = new Book("livro12", "filipa",33);
-livro4 = new Book("livro11", "filipa",333);
-livro5 = new Book("livro30", "filipa",44);
+function removeCard(btnRemove){ 
+    index=btnRemove.getAttribute("data-index"); 
+    myLibrary.splice(index,1);
+    update();
+}
 
+function update(){
+    resetLibrary();
+    displayLibrary();
+}
 
-addBookToLibrary(livro1);
+livro2 = new Book("Livro Exemplo", "Julianna", 22);
 addBookToLibrary(livro2);
-addBookToLibrary(livro3);
-addBookToLibrary(livro4);
-addBookToLibrary(livro5);
 
+function events(){
+    // form buttons events
+    let formButton = document.querySelector("#add-book");
+    let insideFormButton = document.querySelectorAll(".form-button");
+    let submit = document.querySelector("#submit-button");
 
-displayLibrary();
+    formButton.addEventListener("click", openForm);
+    submit.addEventListener("click", createBook);
 
+    insideFormButton.forEach(btn  =>{
+        btn.addEventListener("click", closeForm);
+    });
 
+    // book remove button
+    let remove = document.getElementsByClassName("remove");
+    for (let i=0; i<remove.length; i++){
+        remove[i].addEventListener("click", function(){
+            removeCard(remove[i]);
+        })
+    }
 
-let formButton = document.querySelector("#add-book");
-let insideFormButton = document.querySelectorAll(".form-button");
-let submit = document.querySelector("#submit-button");
-formButton.addEventListener("click", openForm);
-submit.addEventListener("click", createBook);
+    //book read status button
+    let readStatus= document.querySelectorAll("#read-status");
+    readStatus.forEach(btn => {
+        btn.addEventListener("click", function(){
+            console.log(myLibrary[btn.getAttribute("data-index")].readPagesToggle());
+            console.log(myLibrary[btn.getAttribute("data-index")].status);
+            update();
+        });
+    });
+}
 
-insideFormButton.forEach(btn  =>{
-    btn.addEventListener("click", closeForm);
-});
+events();

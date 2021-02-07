@@ -8,12 +8,15 @@
     <link rel="stylesheet" href="./resources/main.css"> 
 </head>
 <body>
+    <header>
+        <h1>My library</h1>
+    </header>
     <div id="container">
         <button id="add-book" type="form">+</button>
         <div class="book-form">
             <div class="form-container">
-                <input type="text" name="title" id="title" placeholder="Book Title" required><br>
-                <input type="text" name="author" id="author" placeholder="Author Name" required><br>
+                <input type="text" name="title" id="title-form" placeholder="Book Title" required><br>
+                <input type="text" name="author" id="author-form" placeholder="Author Name" required><br>
                 <input type="number" name="total-pages" id="total-pages" required>
                 <div id="form-button-container">
                     <button value="submit" class="form-button" id="submit-button" >Submit</button>

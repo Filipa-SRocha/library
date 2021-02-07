@@ -1,16 +1,24 @@
 body{
-    background: white;
+    background: pink;
+}
+header{
+    background: #e0979c;
+}
+h1{
+    font-size: xx-large;
+    padding: 10px;
+    font-family:monospace;
 }
 
 #container{
-    margin:50px auto;
+    margin:10px auto 50px auto;
     width: fit-content;
     padding: 50px;
 }
 
 #add-book{
-    margin: 10px auto;
-    background-image: linear-gradient(#c6b14c,#ffe57d);
+    margin: 2px auto 10px auto;
+    background-image: linear-gradient(rgb(37, 112, 131),#2b7a78);
     display: block;
     padding: 10px;
     color: rgb(255, 255, 255);
@@ -20,39 +28,11 @@ body{
     height: 50px;
     border-radius: 50%;
     box-shadow: 0 4px 8px 0 white;
-    
 }
 
 #add-book:hover{
     box-shadow: 0 3px 30px 0 white;
     
-}
-
-#book-grid{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    grid-gap: 50px;
-    width: 1000px;
-    height: fit-content;
-    padding: 20px;
-}
-
-.book-card{
-    background: #2caeaeec;
-    box-shadow: 0 4px 8px 0 #17252a;
-    text-align: center;
-    padding:2px;
-    width: 200px;
-    height: 200px;
-}
-
-.title{
-    padding: 10px;
-}
-
-.book-info{
-    padding: 10px;
 }
 
 .form-container{
@@ -86,3 +66,64 @@ input{
 #form-button-container{
     margin: 100px 20px 20px 350px;
 }
+
+#book-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 50px;
+    width: 1000px;
+    height: fit-content;
+    padding: 20px;
+}
+/*---------book card----------*/
+
+.book-card, .not-read-card{
+    background: #2caeaeec;
+    box-shadow: 0 4px 8px 0 #17252a;
+    text-align: center;
+    padding:5px;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.not-read-card{
+    background: grey;
+}
+
+.remove{
+    background: #e0979c;
+    border-radius: 20%;
+    width: 30px;
+    margin-left: 150px;
+}
+
+.book-title{
+    margin: 10px;
+    background: #ffe57d;
+    padding: 10px;
+}
+
+.title{
+    padding: 20px;
+}
+
+.book-info{
+    padding: 10px;
+}
+
+#author{
+    margin: 5px;
+}
+
+#pages{
+    margin-top: 20px;
+    text-align: left;
+}
+
+#read-status{
+    width: 83px;
+    margin-left: 10px; 
+}
+
