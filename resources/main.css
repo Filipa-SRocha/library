@@ -1,5 +1,6 @@
 body{
     background: pink;
+    font-size: 16px;
 }
 header{
     background: #e0979c;
@@ -109,21 +110,33 @@ input{
     padding: 20px;
 }
 
-.book-info{
+.book-info, .div-status-container{
     padding: 10px;
+    font-size: 16px;
+
+}
+.read-status-container{
+    text-align: left;
+    margin-left: 10px;
 }
 
 #author{
     margin: 5px;
+
 }
 
 #pages{
     margin-top: 20px;
     text-align: left;
+    font-size: 16px;;
 }
 
 #read-status{
     width: 83px;
     margin-left: 10px; 
+    font-size: 12px;
+}
+label{
+    font-size: 16px;
 }
 
